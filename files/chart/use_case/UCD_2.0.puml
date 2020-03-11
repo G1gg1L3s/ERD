@@ -1,0 +1,27 @@
+@startuml
+right header
+<font size=24 color=black>Package: <b>UCD_2.0
+
+end header
+
+title
+<font size=18 color=black> Редагування записів архіву
+end title
+
+actor Редактор_Архіву as Editor
+
+usecase "Редагування записів архіву" as UC_00
+usecase "Зміна записів" as UC_01
+usecase "Створення записів" as UC_02
+usecase "Видалення записів" as UC_03
+
+Editor -down--> UC_00
+UC_01 .u.|> UC_00
+UC_02 .u.|> UC_00
+UC_03 .u.|> UC_00
+
+right footer
+НТУУ КПІ ім.І.Сікорського
+Київ-2020
+end footer
+@enduml
