@@ -1,0 +1,53 @@
+@startuml
+right header
+<font size=24 color=black>Package: <b>UCD_0.0
+
+end header
+
+title
+<font size=18 color=black> Електронний реєстр документів
+end title
+
+
+actor Гість as Guest
+actor Користувач as User
+actor Адмін_Архіву as Admin
+actor Редактор_Архіву as Editor
+actor Глядач_Архіву as Viewer
+
+usecase "Перегляд інформації про систему" as UC_00
+usecase "Реєстрація в системі" as UC_01
+usecase "Аутентифікація в системі" as UC_02
+usecase "Перегляд інформації про архів" as UC_03
+usecase "Перегляд записів архіву" as UC_04
+usecase "Редагування записів архіву" as UC_05 << <b>UCD_2.0 >>
+usecase "Менеджмент архіву" as UC_06 << <b>UCD_1.0 >>
+
+
+note "Після створення архіву" as NT_00
+
+User  -up--|> Guest
+Viewer  -up--|> User
+Editor  -up--|> Viewer
+Admin  -up--|> Editor
+
+
+Guest -left--> UC_00
+Guest -right--> UC_01
+User -right--> UC_02
+Viewer -right-> UC_03
+Viewer -left-> UC_04
+Editor -right--> UC_05
+Admin -r--> UC_06
+
+
+User .left.. NT_00
+Admin <.. NT_00
+
+
+
+right footer
+НТУУ КПІ ім.І.Сікорського
+Київ-2020
+end footer
+@enduml
