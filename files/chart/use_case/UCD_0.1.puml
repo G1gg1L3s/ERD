@@ -1,0 +1,39 @@
+@startuml
+right header
+<font size=24 color=black>Package: <b>UCD_1.0
+
+end header
+
+title
+<font size=18 color=black> Менеджмент архіву
+end title
+
+actor Адміністратор_Архіву as Editor
+
+usecase "Менеджмент архіву" as UC_00
+usecase "Створення архіву" as UC_01
+usecase "Видалення архіву" as UC_02
+usecase "Зміна інформації про архів" as UC_03
+usecase "Менеджмент доступу" as UC_04
+usecase "Додавання нових користувачів" as UC_04_00
+usecase "Видалення користувачів" as UC_04_01
+usecase "Зміна прав доступу користувачів" as UC_04_02
+
+
+
+Editor -down--> UC_00
+UC_01 .u.|> UC_00
+UC_02 .u.|> UC_00
+UC_03 .u.|> UC_00
+UC_04 .u.|> UC_00
+
+UC_04_00 .u.|> UC_04
+UC_04_01 .u.|> UC_04
+UC_04_02 .u.|> UC_04
+
+
+right footer
+НТУУ КПІ ім.І.Сікорського
+Київ-2020
+end footer
+@enduml
