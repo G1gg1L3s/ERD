@@ -1,0 +1,67 @@
+@startuml
+right header
+<font size=24 color=black>Package: <b> BEM_0.0
+
+end header
+
+title
+<font size=18 color=black> Електронний реєстр документів
+<font size=16 color=black> BE-модель
+
+end title
+
+entity User
+entity User.name
+entity User.id
+
+entity Archive
+entity Archive.name
+entity Archive.description
+entity Archive.id
+
+entity Record
+entity Record.header
+entity Record.description
+
+entity Tag
+entity Tag.value
+
+entity Role
+entity Role.name
+entity Role.description
+
+entity Access
+entity Link
+
+User.id -d-* User
+User.name -d-* User
+
+Archive.name -r-* Archive
+Archive.description -u-* Archive
+Archive.id -u-* Archive
+
+Record.header -d-* Record
+Record.description -d-* Record
+
+
+Role.name -d-* Role
+Role.description -d-* Role
+
+Tag.value --* Tag
+
+Access "0.*" ---- "1.1" User
+Access "0.*" ---- "1.1" Role
+Access "0.*" -u--- "1.1" Archive
+
+Link "0.*" -- "1.1" Record
+Link "0.*" -l-- "1.1" Tag
+
+Archive "1.1" -l-- "0.0" Record
+
+right footer
+
+НТУУ КПІ ім.І.Сікорського
+Київ-2020
+end footer
+@enduml
+
