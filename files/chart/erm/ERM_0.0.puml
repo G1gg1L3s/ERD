@@ -81,9 +81,9 @@ package UserProfileManagment {
 	}
 }
 
-Access "0.*" --> "1.1" User
+Access "0.*" ---u-> "1.1" User
 Access "0.*" --> "1.1" Role
-Access "0.*" -----> "1.1" Archive
+Access "0.*" ---u-> "1.1" Archive
 
 Link "0.*" --> "1.1" Record
 Link "0.*" --> "1.1" Tag
@@ -93,24 +93,24 @@ Archive "1.1" -- "0.*" Record
 RequestType "0.*" --> "1.1" OperationType
 RequestType "0.*" --> "1.1" ObjectType
 
-Grant "0.*" --> "1.1" Access
-Grant "0.*" --> "1.1" RequestType
+Grant "0.*" --l--> "1.1" Access
+Grant "0.*" ---> "1.1" RequestType
 
-ObjectType <... archive : instanceOf
-ObjectType <... record : instanceOf
-ObjectType <... user : instanceOf
-ObjectType <... role : instanceOf
-ObjectType <... tag : instanceOf
+ObjectType <.. archive : instanceOf
+ObjectType <.. record : instanceOf
+ObjectType <.. user : instanceOf
+ObjectType <.. role : instanceOf
+ObjectType <.. tag : instanceOf
 
-OperationType <... create : instanceOf
-OperationType <... read : instanceOf
-OperationType <... update : instanceOf
-OperationType <... delete : instanceOf
+OperationType <.. create : instanceOf
+OperationType <.. read : instanceOf
+OperationType <.. update : instanceOf
+OperationType <.. delete : instanceOf
 
-Role <... admin : instanceOf
-Role <... editor : instanceOf
-Role <... viewer : instanceOf
-Role <... guest : instanceOf
+Role <.. admin : instanceOf
+Role <.. editor : instanceOf
+Role <.. viewer : instanceOf
+Role <.. guest : instanceOf
 
 right footer
 
