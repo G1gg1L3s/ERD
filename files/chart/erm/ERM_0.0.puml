@@ -10,43 +10,107 @@ title
 
 end title
 
-entity User {
-  name
-  id
+package Domain {
+	
+	entity Archive #eeeeff {
+		name
+		description
+	}
+	
+	package DataStructurization {
+		entity Record #eeeeff {
+			header
+			description
+		}
+
+		entity Tag #eeeeff {
+			value
+		}
+	
+		entity Link #ffffcc
+	
+	}
 }
 
-entity Archive {
-  name
-  description
-  id
+
+package AccessPolicy {
+	
+	entity Role #eeeeff {
+		name
+		description
+	}
+
+	entity Access #ffffcc
+	
+	entity OperationType #eeeeff {
+		name
+	}
+	
+	entity ObjectType #eeeeff {
+		name
+	}
+	
+	entity RequestType #ffffcc {
+		name
+	}
+	
+	entity Grant #ffffcc
+	
+	object archive #ffffff
+	object record #ffffff
+	object user #ffffff
+	object role #ffffff
+	object tag #ffffff
+	
+	
+	object create #ffffff
+	object read #ffffff
+	object update #ffffff
+	object delete #ffffff
+	
+	object admin #ffffff
+	object editor #ffffff
+	object viewer #ffffff
+	object guest #ffffff
 }
 
-entity Record {
-  header
-  description
+package UserProfileManagment {
+	entity User #eeeeff {
+		name
+		email
+	}
 }
 
-entity Tag {
-  value
-}
+Access "0.*" --> "1.1" User
+Access "0.*" --> "1.1" Role
+Access "0.*" -----> "1.1" Archive
 
-entity Role {
-  name
-  description
-}
+Link "0.*" --> "1.1" Record
+Link "0.*" --> "1.1" Tag
 
-entity Access
-entity Link
+Archive "1.1" -- "0.*" Record
 
+RequestType "0.*" --> "1.1" OperationType
+RequestType "0.*" --> "1.1" ObjectType
 
-Access "0.*" ---- "1.1" User
-Access "0.*" ---- "1.1" Role
-Access "0.*" -u--- "1.1" Archive
+Grant "0.*" --> "1.1" Access
+Grant "0.*" --> "1.1" RequestType
 
-Link "0.*" -- "1.1" Record
-Link "0.*" -l-- "1.1" Tag
+ObjectType <... archive : instanceOf
+ObjectType <... record : instanceOf
+ObjectType <... user : instanceOf
+ObjectType <... role : instanceOf
+ObjectType <... tag : instanceOf
 
-Archive "1.1" -l-- "0.*" Record
+OperationType <... create : instanceOf
+OperationType <... read : instanceOf
+OperationType <... update : instanceOf
+OperationType <... delete : instanceOf
+
+Role <... admin : instanceOf
+Role <... editor : instanceOf
+Role <... viewer : instanceOf
+Role <... guest : instanceOf
 
 right footer
 
@@ -54,3 +118,4 @@ right footer
 Київ-2020
 end footer
 @enduml
+
