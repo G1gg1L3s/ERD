@@ -1,6 +1,6 @@
 @startuml
 right header
-<font size=24 color=black>Package: <b> ERM_0.2
+<font size=24 color=black>Package: <b> ERM_0.3
 
 end header
 
@@ -10,25 +10,34 @@ title
 
 end title
 
-package Domain {
+package Domain  {
 	
 	package DataStructurization {
 		entity Document #eeeeff {
-			header
-			description
+			id
 		}
 		
 		entity Metadata #ffeeee {
-                        key
-                        value
-                }
+            key
+			value
+        }
 
 		entity Tag #eeeeff {
 			value
 		}
 	
 		entity Link #ffffcc
-	
+		
+		
+		note right of Tag : реаліузує систему тегів\nі пошуку по ним.
+		
+		note top of (Metadata)
+			дозволяє відійти від жорсткої
+			форми документів до форми,
+			яка відрізняється від документа
+			до документа.
+		end note
+ 
 	}
 }
 
@@ -56,8 +65,8 @@ package AccessPolicy {
 	
 	entity Grant #ffffcc
 	
-	object archive #ffffff
-	object record #ffffff
+	object document #ffffff
+	object metadata #ffffff
 	object user #ffffff
 	object role #ffffff
 	object tag #ffffff
@@ -72,6 +81,21 @@ package AccessPolicy {
 	object editor #ffffff
 	object viewer #ffffff
 	object guest #ffffff
+	
+	note right of (Assignment)
+		з'єднує користувачів
+		з їхніми типами
+	end note
+	
+	
+	note left of (Grant)
+		з'єднує
+		**окремих користувачів**
+		АБО
+		**типи користувачів**
+		з діями, які вони 
+		можуть виконувати
+	end note
 }
 
 package UserProfileManagment {
@@ -90,6 +114,13 @@ package HistoryManagement {
                 key
                 value
         }
+        
+        note top of (Extra)
+			мета та сама,
+			що і в Metadata,
+			тільки для івентів
+			журналу подій.
+		end note
 }
 
 Link "0.*" --> "1.1" Document
@@ -97,30 +128,30 @@ Link "0.*" --> "1.1" Tag
 
 Metadata "0.*" --> "1.1" Document
 
-Assignment "0.*" ---> "1.1" User
+Assignment "0.*" -u-> "1.1" User
 Assignment "0.*" ---> "1.1" Role
 
 RequestType "0.*" --> "1.1" OperationType
 RequestType "0.*" --> "1.1" ObjectType
 
-Grant "0.*" ---u-> "0.1" User
-Grant "0.*" --> "0.1" Role
-Grant "0.*" ---> "1.1" RequestType
+Grant "0.*" -u--> "0.1" User
+Grant "0.*" ---> "0.1" Role
+Grant "0.*" --> "1.1" RequestType
 
-Event "0.*" -l---> "1.1" User
+User "1.1" <-r- "0.*" Event
 
-Extra "0.*" ---> "1.1" Event
+Extra "0.*" --> "1.1" Event
 
-ObjectType <.. archive : instanceOf
-ObjectType <.. record : instanceOf
-ObjectType <.. user : instanceOf
-ObjectType <.. role : instanceOf
-ObjectType <.. tag : instanceOf
+ObjectType <.d. document : instanceOf
+ObjectType <.d. metadata : instanceOf
+ObjectType <.d. user : instanceOf
+ObjectType <.d. role : instanceOf
+ObjectType <.d. tag : instanceOf
 
-OperationType <.. create : instanceOf
-OperationType <.. read : instanceOf
-OperationType <.. update : instanceOf
-OperationType <.. delete : instanceOf
+OperationType <... create : instanceOf
+OperationType <... read : instanceOf
+OperationType <... update : instanceOf
+OperationType <... delete : instanceOf
 
 Role <.. admin : instanceOf
 Role <.. editor : instanceOf
