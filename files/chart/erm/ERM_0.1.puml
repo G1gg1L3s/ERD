@@ -12,16 +12,16 @@ end title
 
 package Domain {
 	
-	entity Archive #eeeeff {
-		name
-		description
-	}
-	
 	package DataStructurization {
-		entity Record #eeeeff {
+		entity Document #eeeeff {
 			header
 			description
 		}
+		
+		entity Metadata #ffeeee {
+                        key
+                        value
+                }
 
 		entity Tag #eeeeff {
 			value
@@ -40,7 +40,7 @@ package AccessPolicy {
 		description
 	}
 
-	entity Access #ffffcc
+	entity Assignment #ffffcc
 	
 	entity OperationType #eeeeff {
 		name
@@ -81,20 +81,35 @@ package UserProfileManagment {
 	}
 }
 
-Access "0.*" ---u-> "1.1" User
-Access "0.*" --> "1.1" Role
-Access "0.*" ---u-> "1.1" Archive
 
-Link "0.*" --> "1.1" Record
+package HistoryManagement {
+        entity Event #eeeeff {
+                date
+        }
+        entity Extra #ffeeee {
+                key
+                value
+        }
+}
+
+Link "0.*" --> "1.1" Document
 Link "0.*" --> "1.1" Tag
 
-Archive "1.1" -- "0.*" Record
+Metadata "0.*" --> "1.1" Document
+
+Assignment "0.*" ---> "1.1" User
+Assignment "0.*" ---> "1.1" Role
 
 RequestType "0.*" --> "1.1" OperationType
 RequestType "0.*" --> "1.1" ObjectType
 
-Grant "0.*" --l--> "1.1" Access
+Grant "0.*" ---u-> "0.1" User
+Grant "0.*" --> "0.1" Role
 Grant "0.*" ---> "1.1" RequestType
+
+Event "0.*" -l---> "1.1" User
+
+Extra "0.*" ---> "1.1" Event
 
 ObjectType <.. archive : instanceOf
 ObjectType <.. record : instanceOf
