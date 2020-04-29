@@ -1,64 +1,69 @@
-  // Domain
-  interface Document {};
+// Domain
 
-  interface Metadata {
-    key: string;
-    value: any;
-    doc: Document;
-  };
+interface Document {};
 
-  interface Tag {
-    value: any;
-  };
+interface Metadata {
+  key: string;
+  value: any;
+  doc: Document;
+};
 
-  interface Link {
-    doc: Document,
-    tag: Tag,
-  };
+interface Tag {
+  value: any;
+};
 
-
-  // User profile
-  interface User {
-    name: string,
-    password: string,
-    email: string,
-  };
+interface Link {
+  doc: Document,
+  tag: Tag,
+};
 
 
-  // History
-  interface Event {
-    date: Date,
-    user: User,
-  };
+// User profile
+interface User {
+  name: string,
+  password: string,
+  email: string,
+};
 
-  interface Extra {
-    key: string;
-    value: any;
-    event: Event;
-  };
+// History
+interface Event {
+  date: Date,
+  user: User,
+};
 
-  // Access Policy
-  interface ObjectType {
-    name: string,
-  };
+interface Extra {
+  key: string;
+  value: any;
+  event: Event;
+};
 
-  interface OperationType {
-    name: string,
-  };
+// Access Policy
+interface ObjectType {
+  name: string,
+};
 
-  interface RequestType {
-    name: string,
-    operation: OperationType,
-    request: RequestType,
-  };
+interface OperationType {
+  name: string,
+};
 
-  interface Role {
-    name: string,
-    description: string,
-  };
+interface RequestType {
+  name: string,
+  operation: OperationType,
+  request: RequestType,
+};
 
-  interface Grant {
-    request: RequestType,
-    role: Role | null,
-    user: User | null,
-  };
+interface Role {
+  name: string,
+  description: string,
+};
+
+interface Grant {
+  request: RequestType,
+  role: Role | null,
+  user: User | null,
+};
+
+interface Assignment {
+  role: Role,
+  user: User,
+};
