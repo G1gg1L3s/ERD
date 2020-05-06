@@ -1,0 +1,36 @@
+{
+  "name": "erd",
+  "version": "1.0.0",
+  "description": "Electronic register of documents",
+  "main": "examples/documents.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "node test/connect.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/G1gg1L3s/ERD.git"
+  },
+  "keywords": [
+    "documents",
+    "register"
+  ],
+  "author": "G1gg1L3s, MaryLynJuana, Trafle, gogaeva, MarinaFromMars",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/G1gg1L3s/ERD/issues"
+  },
+  "homepage": "https://github.com/G1gg1L3s/ERD#readme",
+  "dependencies": {
+    "mysql2": "^2.1.0",
+    "sequelize": "^5.21.7"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0"
+  },
+  "optionalDependencies": {
+    "mariadb": "^2.3.1"
+  }
+}
