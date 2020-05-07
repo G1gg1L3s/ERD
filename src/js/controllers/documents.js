@@ -58,6 +58,27 @@ class Documents {
     const tagValues = tags.map(tag => tag.value);
     return this.getTags(tagValues);
   }
+
+  async getByTags(list) {
+    const rawList = list.map(el => `'${el}'`).join(', ');
+
+    const sql = `SELECT docs.id
+      FROM documents AS docs
+      JOIN links ON links.document_id = docs.id
+      WHERE links.tag_id IN 
+        (SELECT id FROM tags WHERE value IN (${rawList}))
+      GROUP BY document_id
+      HAVING count(links.tag_id) = ${list.length};`;
+    const docs = await this.db.sequelize.query(sql, {
+      model: this.db.models.users,
+      mapToModel: true
+    });
+    const include = makeInclude(this);
+    const where = {
+      id: docs.map(doc => doc.id),
+    };
+    return this.db.models.documents.findAll({ include, where });
+  }
 }
 
 module.exports = Documents;

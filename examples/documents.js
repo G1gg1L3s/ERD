@@ -35,6 +35,21 @@ const log = msg => console.log('\n', padd, msg, padd);
     log(`Deleting document with id ${doc.id}`);
     const del = sieve(await docs.delete(doc.id));
     console.dir(del, { depth: 3 });
+
+    log('Creating tags, if not exist');
+    const tags = sieve(await docs.getOrCreate([
+      { value: 'Database' },
+      { value: 'One' },
+    ]));
+    console.dir(tags, { depth: 3 });
+
+    log('Get documents by tags');
+    const docByTags = sieve(await docs.getByTags([
+      'Database',
+      'Relational',
+      'algebra query language',
+    ]));
+    console.dir(docByTags, { depth: 4 });
   } catch (err) {
     console.error(err);
   }
