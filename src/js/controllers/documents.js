@@ -27,17 +27,8 @@ class Documents {
 
   async add(doc) {
     const models = this.db.models;
-    await models.tags.bulkCreate(doc.tags, {
-      fields: ['value'],
-      updateOnDuplicate: ['value']
-    });
 
-    const tagValues = doc.tags.map(tag => tag.value);
-    const tags = await models.tags.findAll({
-      where: {
-        value: { [Op.in]: tagValues }
-      }
-    });
+    const tags = await this.getOrCreate(doc.tags);
 
     const include = [{ model: models.metadata, as: 'metadata' }];
     const document = await this.db.models.documents.create(doc, { include });
@@ -48,6 +39,24 @@ class Documents {
   async delete(id) {
     const doc = await this.getById(id);
     return doc.destroy();
+  }
+
+  async getTags(values) {
+    const models = this.db.models;
+    return models.tags.findAll({
+      where: { value: { [Op.in]: values } }
+    });
+  }
+
+  async getOrCreate(tags) {
+    const models = this.db.models;
+    await models.tags.bulkCreate(tags, {
+      fields: ['value'],
+      updateOnDuplicate: ['value']
+    });
+
+    const tagValues = tags.map(tag => tag.value);
+    return this.getTags(tagValues);
   }
 }
 
