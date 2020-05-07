@@ -9,6 +9,7 @@ const assert = require('assert');
   const sequelize = new Sequelize(options.db);
   try {
     await sequelize.authenticate();
+    console.log('Success!');
   } catch (err) {
     error = err;
   }
