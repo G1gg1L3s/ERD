@@ -505,10 +505,14 @@ docs = [
 # 6. Про нас
 Над доповіддю працювали:
 - Сергійчук Назар, студент КПІ, факультет ФІОТ, група ІП-83
+![Nazar](docs/photos/G1gg1L3s.jpg)
   - Github: [@G1gg1L3s](https://github.com/G1gg1L3s/)
   - Email: mr.a678@gmail.com
+  - Teleram: [@cold_biscuit](https://t.me/cold_biscuit)
   
+
 - Карпюк Ігор, студент КПІ, факультет ФІОТ, група ІП-83
+![Igor](docs/photos/Trafle.jpg)
   - Github: [@Trafle](https://github.com/Trafle)
   - Email: igorokkarpiuk@gmail.com
   - Teleram: [@grizzly_burger](https://t.me/grizzly_burger)
